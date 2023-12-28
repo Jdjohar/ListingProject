@@ -1,68 +1,55 @@
-const express = require('express');
-require('dotenv').config()
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const Admin = require('./models/Admin');
+const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
-const cors = require('cors');
+const port = 3001
+const mongoDB = require("./db")
+const nodemailer = require('nodemailer');
+var path = require('path');
+mongoDB();
 
-app.use(bodyParser.json());
-app.use(cors())
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include OPTIONS method
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Origin, X-Requested-With, Accept'
+  );
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200); // Respond with OK status for OPTIONS request
+  } else {
+    next();
+  }
+});
+
+// app.use((req, res, next) => {
+//   // res.setHeader("Access-Control-Allow-Origin","https://restroproject.onrender.com");
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Content-Type, Authorization, Origin, X-Requested-With, Accept'
+//   );
+//   next();
+// });
+
+// Define the default location for images
+// app.use(express.static(path.join(__dirname, '/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/images', express.static(__dirname + '/uploads'));
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/api/admin/login', async (req, res) => {
-  await mongoose.connect(process.env.MONGO_DB_URL)
-  const { username, password } = req.body;
-  try {
-    // Find the admin by username
-    const admin = await Admin.findOne({ username });
-
-    if (!admin) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-
-    // Compare the password
-    const isMatch = await bcrypt.compare(password, admin.password);
-
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid password' });
-    }
-
-    // Create a JWT token
-    const token = jwt.sign({ username: admin.username, id: admin._id }, process.env.SECRET_KEY, {expiresIn: '6h'});
-
-    res.json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
-// Protected route (requires valid JWT)
-app.get('/api/admin/data', authenticateToken, (req, res) => {
-  // This route is protected, and only accessible with a valid JWT
-  res.json({ message: 'Admin data here!' });
-});
-
-// Middleware to check if the request has a valid JWT
-function authenticateToken(req, res, next) {
-  const token = req.header('Authorization');
-  if (!token) return res.sendStatus(401);
-
-  jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    next();
-  });
-}
-
+app.use(express.json())
+app.use('/api', require("./Routes/CreateUser"));
+// app.use('/api', require("./Routes/Createcategory"));
+app.use('/api', require("./Routes/DisplayData"));
+app.use('/api', require("./Routes/OrderData"));
+app.use('/api', require("./Routes/TestApi"));
+app.use('/api', require("./Routes/ForgotPassword"));
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Server  listening on port ${port}`)
 })

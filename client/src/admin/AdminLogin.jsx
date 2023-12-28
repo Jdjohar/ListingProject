@@ -3,6 +3,7 @@ import { logIn } from '../auth';
 import { useNavigate} from 'react-router-dom'
 
 const AdminLogin = () => {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
@@ -11,12 +12,13 @@ const AdminLogin = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:3000/api/admin/login', {
+      const response = await fetch('http://localhost:3001/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
+
       });
 
       const data = await response.json();
@@ -43,7 +45,7 @@ const AdminLogin = () => {
       <form className='container-admin mt-3' onSubmit={handleLogin}>
         <label className='admin-label'>
           <span className='fs-4'>Username</span>
-          <input type="text" className='form-control' value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} />
         </label>
         <br />
         <label className='admin-label'>

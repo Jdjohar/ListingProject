@@ -11,6 +11,14 @@ import AboutPage from './pages/AboutPage';
 import Team from './pages/Team';
 import MarketPage from './pages/MarketPage';
 import MarketDetailPage from './pages/MarketDetailPage';
+import Brontecreek from './pages/Brontecreek';
+import Burlington from './pages/Burlington';
+import Oakville from './pages/Oakville';
+import Clearview from './pages/Clearview';
+import Collegepark from './pages/Collegepark';
+import Mississauga from './pages/Mississauga';
+import Brampton from './pages/Brampton';
+import Gta from './pages/Gta';
 import ListingPage from './pages/ListingPage';
 import ListingDetailPage from './pages/ListingDetailPage';
 import ServicePage from './pages/ServicePage';
@@ -19,6 +27,7 @@ import AdminLogin from './admin/AdminLogin';
 import AdminDashboard from './admin/AdminDashboard';
 import Admin from './admin/Admin';
 import AdminListing from './admin/AdminListing';
+import Admincontactinformation from './admin/Admincontactinformation';
 
 function App() {
   const location = useLocation();
@@ -37,7 +46,15 @@ function App() {
       <Route path='/about-page' element={<AboutPage/>}/>
       <Route path='/team-page' element={<Team/>}/>
       <Route path='/neighbourhoods' element={<MarketPage/>}/>
-      <Route path='/neighbourhoods/:id' element={<MarketDetailPage/>}/>
+      <Route path='/neighbourhoods/bronte' element={<MarketDetailPage/>}/>
+      <Route path='/neighbourhoods/Brontecreek' element={<Brontecreek/>}/>
+      <Route path='/neighbourhoods/Burlington' element={<Burlington/>}/>
+      <Route path='/neighbourhoods/Oakville' element={<Oakville/>}/>
+      <Route path='/neighbourhoods/Clearview' element={<Clearview/>}/>
+      <Route path='/neighbourhoods/Collegepark' element={<Collegepark/>}/>
+      <Route path='/neighbourhoods/Mississauga' element={<Mississauga/>}/>
+      <Route path='/neighbourhoods/Brampton' element={<Brampton/>}/>
+      <Route path='/neighbourhoods/Gta' element={<Gta/>}/>
       <Route path='/listing-page' element={<ListingPage/>}/>
       <Route path='/listing-page/:id' element={<ListingDetailPage/>}/>
       <Route path='/services' element={<ServicePage/>}/>
@@ -48,6 +65,7 @@ function App() {
       <Route path='/admin' element={<Admin/>}>
       <Route path='admin-dashboard' element={<AdminDashboard/>}/>
       <Route path='admin-listing' element={<AdminListing/>}/>
+      <Route path='/admin/Admincontactinformation' element={<Admincontactinformation/>}/>
       </Route>
 
     </Routes>

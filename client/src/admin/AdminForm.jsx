@@ -1,34 +1,13 @@
 import React, {useState} from 'react'
 import { storage, ref, uploadBytes, getDownloadURL } from '../firebase/firebase';
 
-const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyName, setPropertyName, propertyType, setPropertyType, address, setAddress, saleType, setSaleType, featured, setFeatured, areaSq, setAreaSq, neighbourhood, setNeighbourHood, photoLink, setPhotoLink, beds, setBeds, bathroom, setBathroom, description, setDescription}) => {
- 
-  const handleUpload = async (e) => {
-    e.preventDefault()
-
-  if (!addedPhotos || addedPhotos.length === 0) {
-    return;
-  }
-
-  try {
-    const uploadedUrls = [];
-
-    // Iterate through each selected file and upload it
-    for (const file of addedPhotos) {
-      const storageRef = ref(storage, `images/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const url = await getDownloadURL(storageRef);
-
-      // Add the URL to the array
-      uploadedUrls.push(url);
-    }
-
-    setPhotoLink([...photoLink,uploadedUrls]);
-  } catch (error) {
-    console.error('Error uploading files:', error);
-  }
-  };
-
+const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyName, 
+                      setPropertyName, propertyType, setPropertyType, address, setAddress, 
+                      saleType, setSaleType, featured, setFeatured, areaSq, setAreaSq, 
+                      neighbourhood, setNeighbourHood, photoLink, setPhotoLink, beds, 
+                      setBeds, bathroom, setBathroom, description, setDescription,addedCoverPhotos,
+                      setCoverAddedPhotos,
+  }) => {
 
   return (
    <div className='mx-4'>
@@ -36,29 +15,31 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
     <form onSubmit={handleSubmit} className='mx-4 items-center justify-center'>
     <div className="mb-3">
     <label className="form-label">Property Name</label>
-    <input type="text" value={propertyName} onChange={(e) => setPropertyName(e.target.value)} className="form-control" />
+    <input type="text" value={propertyName} name='PropertyName' onChange={(e) => setPropertyName(e.target.value)} className="form-control" />
   </div>
 
   <div className="mb-3">
     <label className="form-label">Address</label>
-    <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="form-control" />
+    <input type="text" value={address} name='Address' onChange={(e) => setAddress(e.target.value)} className="form-control" />
   </div>
 
   <div className='d-flex flex-wrap gap-3'>
   <div className="mb-3">
     <label className="form-label">Sale Type</label>
     <select 
+    name='SaleType'
      className="form-select"
      value={saleType}
      onChange={(e) => setSaleType(e.target.value)}>
-    <option value="forsale">For Sale</option>
-    <option value="rent">Rent</option>
-    <option value="soldout">Sold Out</option>
+    <option value="For Sale">For Sale</option>
+    <option value="Rent">Rent</option>
+    <option value="Sold Out">Sold Out</option>
     </select>
   </div>
   <div className="mb-3">
     <label className="form-label">Featured</label>
     <select 
+    name='Featured'
     className="form-select" 
     value={featured}
     onChange={(e) => setFeatured(e.target.value)}>
@@ -68,7 +49,7 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
   </div>
   <div className="mb-3">
     <label className="form-label">Area Sq.feet</label>
-    <input type="number" value={areaSq} onChange={(e) => setAreaSq(e.target.value)} className='form-control w-100' style={{border:'1px solid rgb(197 197 197)'}} />
+    <input type="number" name='Area' value={areaSq} onChange={(e) => setAreaSq(e.target.value)} className='form-control w-100' style={{border:'1px solid rgb(197 197 197)'}} />
   </div>
   </div>
 
@@ -76,6 +57,7 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
   <div className="mb-3">
     <label className="form-label">Property Type</label>
     <select 
+    name='PropertyType'
     className="form-select w-100" 
     value={propertyType}
     onChange={(e) => setPropertyType(e.target.value)}>
@@ -89,6 +71,7 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
   <div className="mb-3">
     <label className="form-label">NeighbourHood</label>
     <select 
+    name='NeighbourHood'
     className="form-select w-100"
     value={neighbourhood}
     onChange={(e) => setNeighbourHood(e.target.value)} >
@@ -107,9 +90,18 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
   
 
   <div className='mb-3'>
-    <label className='form-label'>Choose Image</label>
-    <input type="file" multiple accept='image/*' onChange={(e) => setAddedPhotos(e.target.files)}/>
-    <button onClick={handleUpload}>Upload Image</button>
+    <label className='form-label'>Choose Multiple Image</label>
+    <input type="file" multiple ="image/*" 
+    onChange={(e) => {
+        const files = e.target.files;
+        const allFiles = [...addedPhotos];
+    
+        for (let i = 0; i < files.length; i++) {
+        allFiles.push(files[i]);
+    }
+    setAddedPhotos(allFiles);
+  }}
+  />
 
     <div className='d-flex flex-column w-50 outer-pic'>
     <div className='pic-div'>
@@ -120,20 +112,25 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
     </div>
   </div>
 
+  <div className='mb-3'>
+    <label className='form-label'>Choose Cover Image</label>
+    <input type="file" onChange={(e) => setCoverAddedPhotos(e.target.files[0])}/>
+  </div>
+
   <div className='d-flex flex-wrap gap-3'>
   <div className="mb-3">
     <label className="form-label">No. of Beds</label>
-    <input type="number" value={beds} onChange={(e) => setBeds(e.target.value)} className="form-control w-100" style={{border:'1px solid rgb(197 197 197)'}} />
+    <input type="number" name='NumofBeds' value={beds} onChange={(e) => setBeds(e.target.value)} className="form-control w-100" style={{border:'1px solid rgb(197 197 197)'}} />
   </div>
   <div className="mb-3">
     <label className="form-label">No. of Bathrooms</label>
-    <input type="number" value={bathroom} onChange={(e) => setBathroom(e.target.value)} className="form-control w-100" style={{border:'1px solid rgb(197 197 197)'}} />
+    <input type="number" name='NumofBathrooms' value={bathroom} onChange={(e) => setBathroom(e.target.value)} className="form-control w-100" style={{border:'1px solid rgb(197 197 197)'}} />
   </div>
   </div>
 
   <div className="mb-3">
     <label className="form-label">Description</label>
-    <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" />
+    <textarea name='Description' value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" />
   </div>
 
   <button type="submit" className="btn btn-primary mb-5">Submit</button>

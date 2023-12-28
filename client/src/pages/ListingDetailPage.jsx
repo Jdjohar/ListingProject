@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import PropertySpotlight from "../components/PropertySpotlight";
 
 import img1 from "../assets/images/Fateh_burj_Minar_in_chapparchiri.jpg";
@@ -11,50 +12,72 @@ import Footer from "../components/Footer";
 
 
 const ListingDetailPage = () => {
+  
+  const  { id: propertyId }  = useParams(); // Accessing propertyId from URL params
+  const [property, setProperty] = useState(null);
+  const [contactInfo, setContactInfo] = useState(null);
+
+  useEffect(() => {
+    console.log(propertyId, "not found");
+    if (propertyId) {
+      fetchPropertyDetails(); // Fetch data only if propertyId is available
+    }
+    fetchContactInfo();
+  }, [propertyId]);
+
+  const fetchPropertyDetails = async () => {
+    console.log(propertyId , "asd");
+    try {
+      const response = await fetch(`http://localhost:3001/api/property/${propertyId}`); // Replace with your endpoint
+      const data = await response.json();
+      console.log(data)
+      setProperty(data);
+    } catch (error) {
+      console.error('Error fetching property details:', error);
+    }
+  };
+
+  // Fetch contact information from your backend
+  const fetchContactInfo = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/get-contact-info');
+      if (response.ok) {
+        const data = await response.json();
+        setContactInfo(data); // Set the received data to state
+        console.log(data); // Log the fetched data for debugging
+      } else {
+        throw new Error('Failed to fetch contact information.');
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
+  };
+
   return (
     <div>
       <div id="carouselExampleIndicators" className="carousel slide listing-carousel">
-        <div className="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="0"
-            className="active h-25 w-25"
-            aria-current="true"
-            aria-label="Slide 1"
-          >
-            <img src={img1} alt="img" className="d-block w-100" />
-          </button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-            className="h-25 w-25"
-          >
-            <img src={img2} alt="img" className="d-block w-100" />
-          </button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-            className="h-25 w-25"
-          >
-            <img src={img3} alt="img-2" className="d-block w-100" />
-          </button>
-        </div>
-        <div className="carousel-inner listing-inner">
-          <div className="carousel-item active">
-            <img src={img1} className="d-block w-100 h-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src={img2} className="d-block w-100 h-100" alt="..." />
-          </div>
-          <div className="carousel-item">
-            <img src={img3} className="d-block w-100 h-100" alt="..." />
-          </div>
-        </div>
+     <div className="carousel-indicators">
+    {property && property.imageUrls && property.imageUrls.map((imageUrl, index) => (
+      <button
+        key={index}
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to={index}
+        className={index === 0 ? "active h-25 w-25" : "h-25 w-25"}
+        aria-label={`Slide ${index + 1}`}
+      >
+        <img src={`http://localhost:3001/${imageUrl}`} alt={`Slide ${index + 1}`} className="d-block w-100" />
+      </button>
+    ))}
+  </div>
+  <div className="carousel-inner listing-inner">
+    {property && property.imageUrls && property.imageUrls.map((imageUrl, index) => (
+      <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
+        <img src={`http://localhost:3001/${imageUrl}`} className="d-block w-100 h-100" alt={`Image ${index + 1}`} />
+      </div>
+    ))}
+  </div>  
         <button
           className="carousel-control-prev"
           type="button"
@@ -81,19 +104,20 @@ const ListingDetailPage = () => {
         </button>
       </div>
 
+      {property && (
       <section className="section-padding">
         <div className="container">
           <div className="row">
             <div className="col-md-8">
               <button type="button" className="btn btn-primary">
-                For Sale
+                {property.SaleType}
               </button>
               <div className="titlepro">
-                <h3>255 NYLA COURT</h3>
-                <p>255 NYLA COURT, OAKVILLE, ON L6L 0G8</p>
+                <h3>{property.PropertyName}</h3>
+                <p>{property.Address}</p>
               </div>
 
-              <div className="prodesc">
+              <div className="prodesc text-justify">
                 <p>
                   Best of everything!! Fernbrook Showstopper in West Oakville!
                   Stunning executive residence with 4 + 1 bedrooms, 5.5
@@ -136,7 +160,7 @@ const ListingDetailPage = () => {
                     >
                       <img src={bathtub} className="img-fluid" />
                     </span>
-                    6 bath
+                    {property.NumofBeds} bath
                   </div>
                   <div className="list-group-item">
                     <div
@@ -145,7 +169,7 @@ const ListingDetailPage = () => {
                     >
                       <img src={bed} className="img-fluid" />
                     </div>
-                    3 Bed
+                    {property.NumofBathrooms} Bed
                   </div>
                   <div className="list-group-item">
                     <div
@@ -154,7 +178,7 @@ const ListingDetailPage = () => {
                     >
                       <img src={fullSize} className="img-fluid" />
                     </div>
-                    4,193 SQ.FT. LIVING AREA
+                    {property.Area} SQ.FT. LIVING AREA
                   </div>
                 </ul>
               </div>
@@ -162,17 +186,16 @@ const ListingDetailPage = () => {
           </div>
         </div>
       </section>
+      )}
 
+    {contactInfo ? (
       <section className="section-padding bg-light">
         <div className="container">
           <div className="row">
             <div className="d-flex flex-wrap">
-             
-               
-
               <div className="agent-detail d-flex flex-column justify-content-center">
                 <div>
-                  <h3 className="p-3 text-uppercase lato">Janet Shiwram</h3>
+                  <h3 className="p-3 text-uppercase lato">{contactInfo[0].name}</h3>
 
                   <ul
                     className="d-flex flex-wrap "
@@ -183,7 +206,7 @@ const ListingDetailPage = () => {
                         Title
                       </strong>
                       <span className="agendetail  fs-5 d-block">
-                        Sales Representative
+                      {contactInfo[0].title}
                       </span>
                     </li>
                     <li className="list-group-item pe-4 mb-2">
@@ -191,7 +214,7 @@ const ListingDetailPage = () => {
                         PHONE
                       </strong>
                       <span className="agendetail fs-5 d-block">
-                        365-338-7653
+                      {contactInfo[0].phoneNumber}
                       </span>
                     </li>
                     <li className="list-group-item pe-4 mb-2">
@@ -199,7 +222,7 @@ const ListingDetailPage = () => {
                         EMAIL
                       </strong>
                       <span className="agendetail fs-5 d-block">
-                        janetshiwramrealty@gmail.com
+                      {contactInfo[0].email}
                       </span>
                     </li>
                     <li className="list-group-item pe-4 mb-2">
@@ -218,6 +241,9 @@ const ListingDetailPage = () => {
           </div>
         </div>
       </section>
+      ) : (
+        <p>Loading contact information...</p>
+      )}
 
 
     <PropertySpotlight/>

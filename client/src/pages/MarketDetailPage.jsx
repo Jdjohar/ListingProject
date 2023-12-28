@@ -1,11 +1,70 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import video from "../assets/video/bronte.mp4";
 import city1 from "../assets/images/cities/1.jpg";
 import CommonCarousel from "../components/CommonCarousel";
+import { Link } from 'react-router-dom';
 import Footer from "../components/Footer";
-import Listing from "../components/Listing";
 
 const MarketDetailPage = () => {
+
+  const [bronteProperties, setBronteProperties] = useState([]);
+  const [selectedPropertyType, setSelectedPropertyType] = useState('');
+  const [selectedNumofBeds, setSelectedNumofBeds] = useState('');
+  const [selectedNumofBathrooms, setSelectedNumofBathrooms] = useState('');
+
+
+  useEffect(() => {
+    fetchProperties();
+  }, [selectedPropertyType, selectedNumofBeds, selectedNumofBathrooms]);
+
+
+  const sendcityName = {
+    neighborhoods: 'bronte'
+  }
+
+  const fetchProperties = async () => {
+    try {
+
+      const requestBody = {
+        ...sendcityName,
+        propertyType: selectedPropertyType, // Pass selected property type
+        NumofBeds: selectedNumofBeds,
+        NumofBathrooms: selectedNumofBathrooms
+      };
+    
+      const response = await fetch('http://localhost:3001/api/getpropertiesbyNeighbourHood', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody), // Pass your neighborhoods array here
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+
+      const data = await response.json();
+      console.log(data, "data");
+      setBronteProperties(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handlePropertyTypeChange = (event) => {
+    setSelectedPropertyType(event.target.value);
+  };
+
+  const handleNumofBedsChange = (event) => {
+    setSelectedNumofBeds(event.target.value);
+  };
+
+  const handleNumofBathroomsChange = (event) => {
+    setSelectedNumofBathrooms(event.target.value);
+  };
+
+
   return (
     <div>
       <section className="hero-section" id="section_1">
@@ -119,38 +178,90 @@ const MarketDetailPage = () => {
             </div>
 
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
+              <select className=" w-100 serachbtn" onChange={handlePropertyTypeChange}>
                 <option>Select property type</option>
-                <option>Residential</option>
-                <option>Townhouse</option>
-                <option>Condo</option>
-                <option>Commercial</option>
-                <option>Multi-Family</option>
+                <option value="residential">Residential</option>
+                <option value="townhouse">Townhouse</option>
+                <option value="condo">Condo</option>
+                <option value="commercial">Commercial</option>
+                <option value="multifamily">Multi-Family</option>
               </select>
             </div>
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
-                <option>1+ Bathrooms</option>
-                <option>2+ Bathrooms</option>
-                <option>3+ Bathrooms</option>
-                <option>4+ Bathrooms</option>
-                <option>5+ Bathrooms</option>
-                <option>6+ Bathrooms</option>
+              <select className=" w-100 serachbtn" onChange={handleNumofBathroomsChange}>
+                <option value="1+">1+ Bathrooms</option>
+                <option value="2+">2+ Bathrooms</option>
+                <option value="3+">3+ Bathrooms</option>
+                <option value="4+">4+ Bathrooms</option>
+                <option value="5+">5+ Bathrooms</option>
+                <option value="6+">6+ Bathrooms</option>
               </select>
             </div>
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
-                <option>1+ Bedrooms</option>
-                <option>2+ Bedrooms</option>
-                <option>3+ Bedrooms</option>
-                <option>4+ Bedrooms</option>
-                <option>5+ Bedrooms</option>
-                <option>6+ Bedrooms</option>
+              <select className=" w-100 serachbtn" onChange={handleNumofBedsChange}>
+                <option value="1+">1+ Bedrooms</option>
+                <option value="2+">2+ Bedrooms</option>
+                <option value="3+">3+ Bedrooms</option>
+                <option value="4+">4+ Bedrooms</option>
+                <option value="5+">5+ Bedrooms</option>
+                <option value="6+">6+ Bedrooms</option>
               </select>
             </div>
           </div>
         </div>
-        <Listing/>
+
+        {bronteProperties.length == 0 ? (
+              <p className='text-center fw-bold'>No featured properties available.</p>
+            ) : (
+        <div className="container">
+          <div className="row justify-content-center">
+            <h2 className="text-dark text-center mb-5"> </h2>
+            {bronteProperties.map((property, index) => (
+              <div key={index} className="col-lg-4 col-12 my-2">
+                <div className="shad p-3">
+                  <div className="artists-image-wrap">
+                    {property.imageUrls && property.imageUrls[0] ? (
+                      <img
+                        src={`http://localhost:3001/${property.imageUrls[0]}`}
+                        className="artists-image img-fluid"
+                        alt={`Property ${index}`}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                  <div className="py-3">
+                    <h4>{property.PropertyName}</h4>
+                    <p>
+                      <i className="bi bi-pin-map-fill"></i> {property.Address}
+                    </p>
+                    <ul className="p-0 list-point">
+                      <li>
+                        <i className="bi bi-segmented-nav"></i>{' '}
+                        <strong>{property.NumofBeds} Bed</strong>{' '}
+                      </li>
+                      <li>
+                        <i className="bi bi-segmented-nav"></i>{' '}
+                        <strong>{property.NumofBathrooms} Bathroom</strong>{' '}
+                      </li>
+                      <li>
+                        <i className="bi bi-arrows-angle-expand"></i>{' '}
+                        <strong>{property.Area} SQ.Ft</strong>
+                      </li>
+                    </ul>
+                  </div>
+                  <Link
+                    className="btn custom-btn w-100 smoothscroll"
+                    to={`/listing-page/${property._id}`}
+                  >
+                    View Listing
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+            )}
       </section>
 
       <Footer />

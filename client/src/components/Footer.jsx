@@ -1,7 +1,30 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
+    const [contactInfo, setContactInfo] = useState(null);
+    
+    useEffect(() => {
+        fetchContactInfo();
+      }, []);
+
+      // Fetch contact information from your backend
+      const fetchContactInfo = async () => {
+        try {
+          const response = await fetch('http://localhost:3001/api/get-contact-info');
+          if (response.ok) {
+            const data = await response.json();
+            setContactInfo(data); // Set the received data to state
+            console.log(data); // Log the fetched data for debugging
+          } else {
+            throw new Error('Failed to fetch contact information.');
+          }
+        } catch (error) {
+          console.error(error);
+          // Handle error
+        }
+      };
+    
   return (
     <footer className="site-footer pt-5">
     <div className="container">
@@ -43,25 +66,37 @@ const Footer = () => {
             <div className="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                 <h5 className="site-footer-title mb-3">Have a question?</h5>
 
+                {contactInfo ? (
+                    <>
                 <p className="text-white d-flex mb-1">
                     <Link to={"tel: 090-080-0760"} className="site-footer-link">
-                        365-338-7653 
+                    {contactInfo[0].phoneNumber}
                     </Link>
                 </p>
 
                 <p className="text-white d-flex">
                     <Link to={"mailto:hello@company.com"} className="site-footer-link" >
-                        janetshiwramrealty@gmail.com 
+                    {contactInfo[0].email}
                     </Link>
                 </p>
+                </>
+                ) : (
+                    <p>Loading contact information...</p>
+                  )}
             </div>
 
             <div className="col-lg-3 col-md-6 col-11 mb-4 mb-lg-0 mb-md-0">
                 <h5 className="site-footer-title mb-3">Location</h5>
 
+                {contactInfo ? (
+                    <>   
                 <p className="text-white d-flex mt-3 mb-2">
-                    1339 Matheson Blvd. E., Mississauga, ON  L4W 1R1 </p>
-
+                    {contactInfo[0].address} </p>
+                    </>
+                    
+                ) : (
+                    <p>Loading contact information...</p>
+                  )}
                 <Link className="link-fx-1 color-contrast-higher mt-3" to={'/'}>
                     <span>Our Maps</span>
                     <svg className="icon" viewBox="0 0 32 32" aria-hidden="true">
@@ -81,7 +116,7 @@ const Footer = () => {
             <div className="row">
 
                 <div className="col-lg-3 col-12 mt-2">
-                    <p className="copyright-text">Copyright © 2024| Design and Developed by JD Web Services</p>
+                    <p className="copyright-text">Copyright © 2024</p>
                 </div>
 
                 <div className="col-lg-8 col-12 mt-lg-5">
