@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const AdminListing = () => {
   const [propertyName, setPropertyName] = useState('');
   const [address, setAddress] = useState('');
-  const [saleType, setSaleType] = useState('forsale');
+  const [saleType, setSaleType] = useState('For Sale');
   const [featured, setFeatured] = useState('no');
   const [areaSq, setAreaSq] = useState('');
   const [propertyType, setPropertyType] = useState('residential');
@@ -30,7 +30,7 @@ const AdminListing = () => {
         }
 
         // Make a separate request to upload images
-        const uploadResponse = await fetch("http://localhost:3001/api/upload", {
+        const uploadResponse = await fetch("https://estate-tm2d.onrender.com/api/upload", {
             method: 'POST',
             body: formData,
         });
@@ -45,7 +45,7 @@ const AdminListing = () => {
         const coverFormData = new FormData();
         coverFormData.append('coverImage', addedCoverPhotos);
 
-        const coverUploadResponse = await fetch("http://localhost:3001/api/upload-cover", {
+        const coverUploadResponse = await fetch("https://estate-tm2d.onrender.com/api/upload-cover", {
         method: 'POST',
         body: coverFormData,
         });
@@ -53,7 +53,7 @@ const AdminListing = () => {
         console.log('Uploaded cover image:', uploadedCoverImage);
         const coverImageUrl = uploadedCoverImage.coverImageUrl || '';
 
-        const response = await fetch("http://localhost:3001/api/addproperty", {
+        const response = await fetch("https://estate-tm2d.onrender.com/api/addproperty", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

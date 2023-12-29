@@ -32,6 +32,39 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                   </div>
                   <div className="col-6">
                     <div className="mb-3">
+                      <label className="form-label">Sale Type</label>
+                      <select 
+                      name='SaleType'
+                      className="form-select"
+                      value={saleType}
+                      onChange={(e) => setSaleType(e.target.value)}>
+                      <option value="For Sale">For Sale</option>
+                      <option value="Rent">Rent</option>
+                      <option value="Sold Out">Sold Out</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div className="mb-3">
+                      <label className="form-label">Featured</label>
+                      <select 
+                      name='Featured'
+                      className="form-select" 
+                      value={featured}
+                      onChange={(e) => setFeatured(e.target.value)}>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div className="mb-3">
+                      <label className="form-label">Area Sq.feet</label>
+                      <input type="number" name='Area' value={areaSq} onChange={(e) => setAreaSq(e.target.value)} className='form-control w-100 py-3' style={{border:'1px solid rgb(197 197 197)'}} />
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div className="mb-3">
                       <label className="form-label">Property Type</label>
                       <select 
                         name='PropertyType'
@@ -99,13 +132,13 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                   <div className="col-6">
                     <div className="mb-3">
                       <label className="form-label">No. of Beds</label>
-                      <input type="number" name='NumofBeds' value={beds} onChange={(e) => setBeds(e.target.value)} className="form-control w-100" style={{border:'1px solid rgb(197 197 197)'}} />
+                      <input type="number" name='NumofBeds' value={beds} onChange={(e) => setBeds(e.target.value)} className="form-control w-100 py-3" style={{border:'1px solid rgb(197 197 197)'}} />
                     </div>
                   </div>
                   <div className="col-6">
                     <div className="mb-3">
                       <label className="form-label">No. of Bathrooms</label>
-                      <input type="number" name='NumofBathrooms' value={bathroom} onChange={(e) => setBathroom(e.target.value)} className="form-control w-100" style={{border:'1px solid rgb(197 197 197)'}} />
+                      <input type="number" name='NumofBathrooms' value={bathroom} onChange={(e) => setBathroom(e.target.value)} className="form-control w-100 py-3" style={{border:'1px solid rgb(197 197 197)'}} />
                     </div>
                   </div>
                   <div className="col-6">
