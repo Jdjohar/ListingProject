@@ -12,7 +12,7 @@ const AdminLogin = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
+      const response = await fetch('https://estate-tm2d.onrender.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ export default function AdminContactInformation() {
 
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/get-contact-info');
+      const response = await fetch('https://estate-tm2d.onrender.com/api/get-contact-info');
       if (response.ok) {
         const contactInfo = await response.json();
         if (contactInfo && contactInfo.length > 0) {
@@ -36,7 +36,7 @@ export default function AdminContactInformation() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/submit-contact-info', {
+      const response = await fetch('https://estate-tm2d.onrender.com/api/submit-contact-info', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
