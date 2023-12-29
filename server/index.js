@@ -8,22 +8,24 @@ mongoDB();
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include OPTIONS method
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Include OPTIONS method
+  // res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include OPTIONS method
   res.header(
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, Origin, X-Requested-With, Accept'
   );
+  next();
   // Handle preflight request
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200); // Respond with OK status for OPTIONS request
-  } else {
-    next();
-  }
+  // if (req.method === 'OPTIONS') {
+  //   res.sendStatus(200); // Respond with OK status for OPTIONS request
+  // } else {
+  //   next();
+  // }
 });
 
 // app.use((req, res, next) => {
 //   // res.setHeader("Access-Control-Allow-Origin","https://restroproject.onrender.com");
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3001");
 //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 //   res.header(
 //     'Access-Control-Allow-Headers',

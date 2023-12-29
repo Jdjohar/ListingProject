@@ -30,6 +30,12 @@ const AdminNavbar = () => {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
+                <Link to={'/admin/admin-listing'} className='btn btn-primary mx-3'>Add New Property</Link>
+              </li>
+              <li className="nav-item">
+                <Link to={'/admin/Admincontactinformation'} className='btn btn-primary mx-3'>Add Contact Info</Link>
+              </li>
+              <li className="nav-item">
                 <button
                   className="btn btn-primary"
                   onClick={()=>handleLogout()}

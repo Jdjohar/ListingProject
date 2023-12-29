@@ -241,5 +241,25 @@ router.post("/addproperty",
       res.status(500).json({ error: error.message });
     }
   });
+
+  router.put('/update-sale-type/:id', async (req, res) => {
+    try {
+      const propertyId = req.params.id;
+      const { newSaleType } = req.body;
+  
+      const property = await Property.findById(propertyId);
+      if (!property) {
+        return res.status(404).json({ message: 'Property not found' });
+      }
+  
+      property.SaleType = newSaleType;
+      await property.save();
+  
+      res.json({ Success: true, message: 'SaleType updated successfully' });
+    } catch (error) {
+      res.status(500).json({ Success: false, error: error.message });
+    }
+  });
+  
       
 module.exports = router;
