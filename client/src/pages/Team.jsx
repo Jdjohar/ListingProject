@@ -60,10 +60,10 @@ const Team = () => {
         </div>
       </section>
 
-      <section className='carousel-sec pt-4 pb-5'>
+      {/* <section className='carousel-sec pt-4 pb-5'>
     <h2 className="fw-bold display-4 p-2 text-center my-3">What our customers say</h2>
     <CommonCarousel/>
-    </section>
+    </section> */}
 
     <Footer/>
     </main>

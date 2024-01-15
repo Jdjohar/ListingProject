@@ -17,8 +17,8 @@ const HomePage = () => {
         <Header/>
         <About/>
         <CardToPage/>
-        <Listing/>
-        <PropertySpotlight/>
+        {/* <Listing/> */}
+        {/* <PropertySpotlight/> */}
         <MarketCoverage/>
         <PressMedia/>
         <Contact/>

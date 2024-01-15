@@ -18,19 +18,19 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
             <div className="tab-content shadow-lg mt-5" id="nav-tabContent">
               <form onSubmit={handleSubmit} className='mx-4 items-center justify-center'>
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Property Name</label>
                       <input type="text" value={propertyName} name='PropertyName' onChange={(e) => setPropertyName(e.target.value)} className="form-control" />
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Address</label>
                       <input type="text" value={address} name='Address' onChange={(e) => setAddress(e.target.value)} className="form-control" />
                     </div>  
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Sale Type</label>
                       <select 
@@ -44,7 +44,7 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                       </select>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Featured</label>
                       <select 
@@ -57,13 +57,13 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                       </select>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Area Sq.feet</label>
                       <input type="number" name='Area' value={areaSq} onChange={(e) => setAreaSq(e.target.value)} className='form-control w-100 py-3' style={{border:'1px solid rgb(197 197 197)'}} />
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Property Type</label>
                       <select 
@@ -79,7 +79,7 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                       </select>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">NeighbourHood</label>
                       <select 
@@ -99,7 +99,7 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                       </select>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className='mb-3'>
                       <label className='form-label'>Choose Multiple Image</label>
                       <input type="file" multiple ="image/*" 
@@ -123,25 +123,25 @@ const AdminForm = ({ type, handleSubmit, addedPhotos, setAddedPhotos, propertyNa
                       </div>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className='mb-3'>
                       <label className='form-label'>Choose Cover Image</label>
                       <input type="file" onChange={(e) => setCoverAddedPhotos(e.target.files[0])}/>
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">No. of Beds</label>
                       <input type="number" name='NumofBeds' value={beds} onChange={(e) => setBeds(e.target.value)} className="form-control w-100 py-3" style={{border:'1px solid rgb(197 197 197)'}} />
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">No. of Bathrooms</label>
                       <input type="number" name='NumofBathrooms' value={bathroom} onChange={(e) => setBathroom(e.target.value)} className="form-control w-100 py-3" style={{border:'1px solid rgb(197 197 197)'}} />
                     </div>
                   </div>
-                  <div className="col-6">
+                  <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Description</label>
                       <textarea name='Description' value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" />

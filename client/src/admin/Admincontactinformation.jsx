@@ -76,7 +76,7 @@ export default function AdminContactInformation() {
               <div className="tab-content shadow-lg mt-5" id="nav-tabContent">
                 <form action="" onSubmit={handleSubmit}>
                   <div className="row">
-                    <div className="col-6">
+                    <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                       <div className="mb-3">
                         <label className="form-label">Name</label>
                         <input
@@ -88,7 +88,7 @@ export default function AdminContactInformation() {
                         />
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                       <div className="mb-3">
                         <label className="form-label">Title</label>
                         <input
@@ -100,7 +100,7 @@ export default function AdminContactInformation() {
                         />
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                       <div className="mb-3">
                         <label className="form-label">Email</label>
                         <input
@@ -112,7 +112,7 @@ export default function AdminContactInformation() {
                         />
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                       <div className="mb-3">
                         <label className="form-label">Address</label>
                         <input
@@ -124,11 +124,11 @@ export default function AdminContactInformation() {
                         />
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-12 col-md-6 col-sm-6 col-lg-6">
                       <div className="mb-3">
                         <label className="form-label">Phone Number</label>
                         <input
-                          type="number"
+                          type="text"
                           name="number"
                           className="form-control w-100 contactt"
                           value={formData.number}

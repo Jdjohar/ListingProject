@@ -1,11 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import adminLogo from '../assets/admin.svg';
 import { isLoggedIn } from '../auth';
 
 const Navbar = () => {
     const [isSticky, setSticky] = useState(false);
+
+    const location = useLocation();
+
+const homeClass = location.pathname === "/" ? "active" : "";
+const aboutClass = location.pathname.match(/^\/about/) ? "active" : "";
+const contactClass = location.pathname.match(/^\/contact/) ? "active" : "";
+const servicesClass = location.pathname.match(/^\/services/) ? "active" : "";
+const listingClass = location.pathname.match(/^\/listing/) ? "active" : "";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,27 +48,31 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav align-items-lg-center text-uppercase ms-auto me-lg-5">
                         <li className="nav-item">
-                            <Link className="nav-link " to={'/'}>Home</Link>
+                            <Link className={`nav-link ${homeClass}`} to={'/'}>Home</Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link " to={'/about-page'}>About</Link>
+                            <Link className={`nav-link ${aboutClass}`} to={'/about-page'}>About</Link>
                         </li>
 
                         <li className="nav-item">
+                            <Link className={`nav-link ${servicesClass}`} to={'/services'}>Services</Link>
+                        </li>
+
+                        {/* <li className="nav-item">
                             <Link className="nav-link " to={'/team-page'}>Team</Link>
                         </li>
 
                         <li className="nav-item">
                             <Link className="nav-link " to={'/neighbourhoods'}>Neighbourhoods</Link>
+                        </li> */}
+
+                        <li className="nav-item">
+                            <Link className={`nav-link ${listingClass}`} to={'/listing-page'}>Listing</Link>
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link " to={'/listing-page'}>Listing</Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to={'/contact'}>Contact</Link>
+                            <Link className={`nav-link ${contactClass}`} to={'/contact'}>Contact</Link>
                         </li>
 
                         <li className="nav-item">

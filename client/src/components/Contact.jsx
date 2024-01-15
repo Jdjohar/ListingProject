@@ -6,7 +6,7 @@ const Contact = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-8 col-12 mx-auto">
-            <h2 className="text-center mb-4">Interested? Let's talk</h2>
+            <h2 className="text-center mb-4">Lets’s Find your dream home, together </h2>
 
             <nav className="d-flex justify-content-center">
               <div
@@ -27,7 +27,7 @@ const Contact = () => {
                   <h5>Contact Form</h5>
                 </button>
 
-                <button
+                {/* <button
                   className="nav-link"
                   id="nav-ContactMap-tab"
                   data-bs-toggle="tab"
@@ -38,7 +38,7 @@ const Contact = () => {
                   aria-selected="false"
                 >
                   <h5>Google Maps</h5>
-                </button>
+                </button> */}
               </div>
             </nav>
 
@@ -81,13 +81,25 @@ const Contact = () => {
                       </div>
                     </div>
 
+                    <div className=" col-12">
+                      <input
+                        type="text"
+                        name="contact-phone"
+                        id="contact-phone"
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        className="form-control"
+                        placeholder="Phone number (e.g., 123-456-7890)"
+                        required
+                      />
+                    </div>
+
                     <input
                       type="text"
                       name="contact-company"
                       id="contact-company"
                       className="form-control"
                       placeholder="Company"
-                      required
+                      // required
                     />
 
                     <textarea

@@ -75,7 +75,7 @@ const Clearview = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
-              <img src={city5} className="img-fluid" />
+              <img src={city5} className="img-fluid mb-4" />
             </div>
 
             <div className="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
@@ -126,12 +126,12 @@ const Clearview = () => {
           </div>
         </div>
       </section>
-      <section className="carousel-sec pt-4 pb-5">
+      {/* <section className="carousel-sec pt-4 pb-5">
         <h2 className="fw-bold display-4 p-2 text-center my-3">
           What our customers say
         </h2>
         <CommonCarousel />
-      </section>
+      </section> */}
 
       <section className="testimonial py-5" style={{background: "#ebebeb"}}>
         <div className="container py-5">

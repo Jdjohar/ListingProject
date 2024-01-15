@@ -15,7 +15,7 @@ const PressMedia = () => {
                     <img className="img-fluid" src={social_1} alt="social" />
                     <div className="overlay">
                        <h2>FACEBOOK</h2>
-                       <Link className="info" to={'/'} target='_blank'>VIEW</Link>
+                       <Link className="info" to={'https://www.facebook.com/Janetshiwramrealty '} target='_blank'>VIEW</Link>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@ const PressMedia = () => {
                         <div className="overlay">
                             <h2>INSTAGRAM</h2>
                             <p>
-                                <Link to={"https://www.instgram.com"} target='_blank'>VIEW</Link>
+                                <Link to={"https://www.instagram.com/janetshiwramrealty"} target='_blank'>VIEW</Link>
                             </p>
                         </div>
                 </div>
@@ -34,9 +34,9 @@ const PressMedia = () => {
                 <div className="hovereffect">
                     <img className="img-fluid" src={social_3} alt="social" />
                         <div className="overlay">
-                            <h2>YOUTUBE</h2>
+                            <h2>Tiktok</h2>
                             <p>
-                                <Link to={"https://www.youtube.com"} target='_blank' >VIEW</Link>
+                                <Link to={"https://www.tiktok.com/janetshiwramrealty"} target='_blank' >VIEW</Link>
                             </p>
                         </div>
                 </div>

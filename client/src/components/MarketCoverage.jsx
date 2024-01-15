@@ -15,8 +15,8 @@ const MarketCoverage = () => {
     <section className="artists-section section-padding" id="section_4">
             <div className="container">
                 <div className="row justify-content-center">
-                    <h2 className="text-dark text-center mb-5">Market Coverage </h2>
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12 ">
+                    <h2 className="text-dark text-center mb-5">Market Coverage to Neighborhoods </h2>
+                    {/* <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12 ">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city1} alt="city" />
                             <div className="overlay">
@@ -24,8 +24,8 @@ const MarketCoverage = () => {
                                <Link className="info" to={'/neighbourhoods/bronte'}>VIEW</Link>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    </div> */}
+                    {/* <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city2} alt="city" />
                                 <div className="overlay">
@@ -35,7 +35,7 @@ const MarketCoverage = () => {
                                     </p>
                                 </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city3} alt="city" />
@@ -58,7 +58,7 @@ const MarketCoverage = () => {
                                 </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    {/* <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city5} alt="city" />
                                 <div className="overlay">
@@ -68,8 +68,8 @@ const MarketCoverage = () => {
                                     </p>
                                 </div>
                         </div>
-                    </div>
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    </div> */}
+                    {/* <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city6} alt="city" />
                                 <div className="overlay">
@@ -79,7 +79,7 @@ const MarketCoverage = () => {
                                     </p>
                                 </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city7} alt="city" />
@@ -91,7 +91,7 @@ const MarketCoverage = () => {
                                 </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    {/* <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city8} alt="city" />
                                 <div className="overlay">
@@ -101,7 +101,7 @@ const MarketCoverage = () => {
                                     </p>
                                 </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city9} alt="city" />

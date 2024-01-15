@@ -23,10 +23,10 @@ const AboutPage = () => {
 
                 <div className="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
                     <div className="services-info">
-                        <h2 className="text-dark mb-4">Meet Janet Shiwram </h2>
-                        <p className="text-dark">Meet Janet Shiwram, a seasoned realtor with a unique twist – she's not just skilled in the art of property transactions, but also holds a background in psychotherapy. Born and raised in a bustling urban center, Emily discovered her passion while she was buying her own house. However, her journey started with meeting people with various mental health conditions when she decided to pursue Psychotherapy Practitioner Training even before her real estate career.</p>
+                        <h2 className="text-dark mb-4"> Introducing Janet Shiwram </h2>
+                        <p className="text-dark">Janet Shiwram is a licensed Realtor®️ with the Toronto Regional Real Estate Board (TRREB).  Janet has the ability to reach buyers, sellers, businesses and marketing statistics and information , throughout the GTA and surrounding areas.</p>
 
-                        <p className="text-dark">Janet's educational background includes a Diploma and discovering a Total Self Program, which laid the foundation for her interest in understanding the human mind. And she did not stop there, she even upgraded her education with an additional Diploma in Addictions Counselling & Social Service. Eager to merge her love for real estate with her fascination for psychology, she embarked on a dual career path that helps her counselling her clients well to take the right decision on their most expensive purchase.</p>
+                        <p className="text-dark">Real Estate business, Janet holds an extensive background in psychotherapy and counselling. In short, Janet Shiwram is all about people and supporting families through their transitions. </p>
 
                       </div>
                 </div>
@@ -35,7 +35,7 @@ const AboutPage = () => {
                     <div className="about-text-wrap">
                         <img src={aboutimg} className="about-image img-fluid" />
 
-                        <div className="about-text-info d-flex">
+                        {/* <div className="about-text-info d-flex">
                             <div className="d-flex">
                                 <i className="about-text-icon bi-person"></i>
                             </div>
@@ -46,26 +46,25 @@ const AboutPage = () => {
 
                                 <p className="mb-0">Real Estate</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
             </div>
 
             <div className="row">
-              <p className="text-dark mb-2">Having completed rigorous training in psychotherapy, Janet gained valuable insights into human behavior, communication, and the emotional aspects of decision-making. These skills proved to be invaluable in her real estate endeavors, allowing her to connect with clients on a deeper level. Janet's clients appreciate her ability to empathize with their needs, understand their preferences, and guide them through the intricate process of buying or selling a home.</p>
-              <p className="text-dark mb-2">In her real estate practice, Janet applies principles of effective communication, negotiation, and conflict resolution that she honed during her psychotherapy training. Her clients often comment on her calming presence, which helps alleviate the stress that can come with major life decisions such as buying or selling a property.</p>
-              <p className="text-dark mb-2">Janet's dual expertise has also led her to specialize in helping clients find homes that not only meet their physical requirements but also align with their emotional and psychological needs. Whether it's a first-time homebuyer navigating the excitement and anxiety of a new chapter or a seller parting ways with a property filled with memories, Emily is adept at guiding her clients through the emotional nuances of real estate transactions.</p>
-              <p className="text-dark mb-2"> Outside of work, Janet is an advocate for mental health awareness and often volunteers her time to support local initiatives. She believes in the power of a holistic approach to well-being, whether that involves finding the perfect home or fostering a positive mental state.</p>
-              <p className="text-dark mb-2"> Janet Shiwram stands as a testament to the harmonious blend of real estate expertise and psychotherapeutic insights. Her unique skill set has not only helped her build a successful career but has also made a lasting impact on the lives of those she serves in the dynamic world of real estate.</p>
+              <p className="text-dark mb-2">Janet has always been intrigued about understanding the human mind. Her education curtailed around the total self programs, addictions, counseling and various social services programs   She takes pride in her work history of helping low income people find affordable housing and conducting community workshops teaching mental health and life skills. To merge her love for Real Estate with her fascination for psychology she embarked on a dual career path that helps her counsel and support her clients to make the best decisions on their important Real Estate transactions.</p>
+              <p className="text-dark mb-2">Janet Shiwram, your reliable Realtor®️.</p>
+              <p className="text-dark mb-2">Janet brings a sophisticated approach in understanding human behavior, communication and the emotional aspects of decision-making.  These are invaluable and unique when it comes to the intricate process of buying and selling a home. In her practice, Janet applies principles of effective communication, skilled negotiation as well as a calming presence for an amicable resolution during transactions.</p>
+              <p className="text-dark mb-2">Janet understands that a Real Estate transaction should not only meet your physical and financial requirements, but it should align with your emotional and psychological needs whether you are a first time home buyer, navigating the excitement and anxiety of a new chapter or a seller parting ways with a property filled with memories. Janet is adept at guiding clients through the emotional nuances of real estate transactions . Her unique skills have not only assisted her to build a successful career, it continues to also make a lasting impact on the lives of those she serves in the dynamic world of Real Estate. </p>
             </div>
         </div>
     </section>
 
-    <section className='carousel-sec pt-4 pb-5'>
+    {/* <section className='carousel-sec pt-4 pb-5'>
     <h2 className="fw-bold display-4 p-2 text-center my-3">What our customers say</h2>
     <CommonCarousel/>
-    </section>
+    </section> */}
 
     <Footer/>
     </main>

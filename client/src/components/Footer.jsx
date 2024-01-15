@@ -42,13 +42,13 @@ const Footer = () => {
                         <Link to={'/about-page'} className="site-footer-link">About</Link>
                     </li>
 
-                    <li className="site-footer-link-item">
+                    {/* <li className="site-footer-link-item">
                         <Link to={'/team-page'} className="site-footer-link">Team</Link>
                     </li>
 
                     <li className="site-footer-link-item">
                         <Link to={'/neighbourhoods'} className="site-footer-link">Neighbourhoods</Link>
-                    </li>
+                    </li> */}
 
                     <li className="site-footer-link-item">
                         <Link to={'/listing-page'} className="site-footer-link">Listing</Link>
@@ -97,7 +97,7 @@ const Footer = () => {
                 ) : (
                     <p>Loading contact information...</p>
                   )}
-                <Link className="link-fx-1 color-contrast-higher mt-3" to={'/'}>
+                {/* <Link className="link-fx-1 color-contrast-higher mt-3" to={'/'}>
                     <span>Our Maps</span>
                     <svg className="icon" viewBox="0 0 32 32" aria-hidden="true">
                         <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
@@ -106,7 +106,7 @@ const Footer = () => {
                             <line x1="16" y1="12" x2="22" y2="18"></line>
                         </g>
                     </svg>
-                </Link>
+                </Link> */}
             </div>
         </div>
     </div>

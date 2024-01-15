@@ -1,6 +1,7 @@
 import React from 'react'
 import Listing from '../components/Listing';
 import Footer from '../components/Footer';
+import MarketCoverage from '../components/MarketCoverage';
 
 const ListingPage = () => {
   return (
@@ -9,8 +10,10 @@ const ListingPage = () => {
             <div className="container">
             </div>
         </section>
+        
+        <MarketCoverage/>
 
-        <Listing/>
+        {/* <Listing/> */}
 
         <Footer/>
 

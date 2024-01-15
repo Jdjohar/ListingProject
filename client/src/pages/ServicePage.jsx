@@ -25,7 +25,7 @@ const ServicePage = () => {
 
             <div className="col-lg-7 col-12 mb-4 mb-lg-0 d-flex align-items-center">
               <div className="services-info w-100">
-                <h2 className="text-dark mb-4">Our Services </h2>
+                <h2 className="text-dark mb-4 mt-3">Our Services </h2>
                 <p>
                   Discover seamless transactions at Jannat Shiwram, your go-to
                   destination for buying, selling, and investing. Elevate your
@@ -35,7 +35,7 @@ const ServicePage = () => {
                 <hr />
                 <div className="detailcity py-5 d-flex flex-row justify-content-between">
                   <div className="d-flex flex-row align-items-center">
-                    <div className="item"></div>
+                    {/* <div className="item"></div> */}
                     <div className="itemcopy">
                       <h2 className=" text-left font-weight-bold hrd">
                         Buying
@@ -43,15 +43,15 @@ const ServicePage = () => {
                     </div>
                   </div>
                   <div className="d-flex flex-row align-items-center">
-                    <div className="item"></div>
+                    {/* <div className="item"></div> */}
                     <div className="itemcopy">
                       <h3 className=" font-weight-bold hrd">Selling</h3>
                     </div>
                   </div>
                   <div className="d-flex flex-row align-items-center">
-                    <div className="item"></div>
+                    {/* <div className="item"></div> */}
                     <div className="itemcopy">
-                      <h3 className=" font-weight-bold hrd">MEDIUM</h3>
+                      <h3 className=" font-weight-bold hrd">Investing</h3>
                     </div>
                   </div>
                 </div>
