@@ -33,7 +33,7 @@ const AboutPage = () => {
 
                 <div className="col-lg-6 col-12">
                     <div className="about-text-wrap">
-                        <img src={aboutimg} className="about-image img-fluid" />
+                        <img src={aboutimg} className="about-image w-75 d-block m-auto img-fluid" />
 
                         {/* <div className="about-text-info d-flex">
                             <div className="d-flex">

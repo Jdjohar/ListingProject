@@ -15,7 +15,7 @@ const MarketCoverage = () => {
     <section className="artists-section section-padding" id="section_4">
             <div className="container">
                 <div className="row justify-content-center">
-                    <h2 className="text-dark text-center mb-5">Market Coverage to Neighborhoods </h2>
+                    <h2 className="text-dark text-center mb-5">Neighborhoods </h2>
                     {/* <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12 ">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city1} alt="city" />

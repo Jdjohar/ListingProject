@@ -9,7 +9,7 @@ const PressMedia = () => {
     <section className="artists-section section-padding" id="section_3">
     <div className="container">
         <div className="row justify-content-center">
-            <h2 className="text-dark text-center mb-5">PRESS & MEDIA </h2>
+            <h2 className="text-dark text-center mb-5">Social Links </h2>
             <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12 ">
                 <div className="hovereffect">
                     <img className="img-fluid" src={social_1} alt="social" />

@@ -75,11 +75,11 @@ const listingClass = location.pathname.match(/^\/listing/) ? "active" : "";
                             <Link className={`nav-link ${contactClass}`} to={'/contact'}>Contact</Link>
                         </li>
 
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link className='admin' to={isLoggedIn ? '/admin/admin-dashboard' : '/admin-login'}>
                                 <img src={adminLogo} alt="admin" />
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
 
                </div>

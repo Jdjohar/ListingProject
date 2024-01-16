@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import video from "../assets/video/bronte.mp4";
+import video from "../assets/video/REST OF GTA.mp4";
 import city9 from "../assets/images/cities/9.jpg";
 import CommonCarousel from "../components/CommonCarousel";
 import { Link } from 'react-router-dom';

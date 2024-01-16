@@ -16,7 +16,7 @@ const HomePage = () => {
     <div>
         <Header/>
         <About/>
-        <CardToPage/>
+        {/* <CardToPage/> */}
         {/* <Listing/> */}
         {/* <PropertySpotlight/> */}
         <MarketCoverage/>
