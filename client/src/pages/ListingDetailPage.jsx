@@ -9,7 +9,7 @@ import bathtub from "../assets/bath-tub.png";
 import bed from "../assets/double-bed.png";
 import fullSize from "../assets/full-size.png";
 import Footer from "../components/Footer";
-
+import he from 'he';
 
 const ListingDetailPage = () => {
   
@@ -18,6 +18,13 @@ const ListingDetailPage = () => {
   const  { id: propertyId }  = useParams(); // Accessing propertyId from URL params
   const [property, setProperty] = useState(null);
   const [contactInfo, setContactInfo] = useState(null);
+
+
+  const convertHtmlEntitiesToText = (htmlString) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlString, 'text/html');
+    return doc.body.textContent || "";
+  };
 
   useEffect(() => {
     console.log(propertyId, "not found");
@@ -30,7 +37,7 @@ const ListingDetailPage = () => {
   const fetchPropertyDetails = async () => {
     console.log(propertyId , "asd");
     try {
-      const response = await fetch(`https://estate-tm2d.onrender.com/api/property/${propertyId}`); // Replace with your endpoint
+      const response = await fetch(`http://localhost:3001/api/property/${propertyId}`); // Replace with your endpoint
       const data = await response.json();
       console.log(data)
       setProperty(data);
@@ -42,7 +49,7 @@ const ListingDetailPage = () => {
   // Fetch contact information from your backend
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch('https://estate-tm2d.onrender.com/api/get-contact-info');
+      const response = await fetch('http://localhost:3001/api/get-contact-info');
       if (response.ok) {
         const data = await response.json();
         setContactInfo(data); // Set the received data to state
@@ -73,14 +80,14 @@ const ListingDetailPage = () => {
         className={index === 0 ? "active h-25 w-25" : "h-25 w-25"}
         aria-label={`Slide ${index + 1}`}
       >
-        <img src={`https://estate-tm2d.onrender.com/${imageUrl}`} alt={`Slide ${index + 1}`} className="d-block w-100" />
+        <img src={`http://localhost:3001/${imageUrl}`} alt={`Slide ${index + 1}`} className="d-block w-100" />
       </button>
     ))}
   </div>
   <div className="carousel-inner listing-inner">
     {property && property.imageUrls && property.imageUrls.map((imageUrl, index) => (
       <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-        <img src={`https://estate-tm2d.onrender.com/${imageUrl}`} className="d-block w-100 h-100" alt={`Image ${index + 1}`} />
+        <img src={`http://localhost:3001/${imageUrl}`} className="d-block w-100 h-100" alt={`Image ${index + 1}`} />
       </div>
     ))}
   </div>  
@@ -121,39 +128,10 @@ const ListingDetailPage = () => {
               <div className="titlepro">
                 <h3>{property.PropertyName}</h3>
                 <p>{property.Address}</p>
+                <p>{property.price || 'No'}</p>
               </div>
-
               <div className="prodesc text-justify">
-                <p>
-                  Best of everything!! Fernbrook Showstopper in West Oakville!
-                  Stunning executive residence with 4 + 1 bedrooms, 5.5
-                  bathrooms, approx 4193 sq ft plus professionally finished
-                  lookout basement by the builder on largest court lot with 218'
-                  deep & 177' rear with cedar fencing & large covered terrace in
-                  the huge backyard.Exclusive quiet court with only 14 homes
-                  surrounding the recently created Hixon Park. Extensive
-                  upgrades including, wide-plank engineered hardwood flooring,
-                  elevator with access to the attached garage, plaster crown
-                  mouldings, 10’ & 9’ ceilings, 3 gas fireplaces, numerous pot
-                  lights, upgraded light fixtures, Hunter Douglas window
-                  coverings & shutters, upgraded tiles, Cat 6A wiring, ethernet
-                  in all rooms, cabinetry, stone counters, enlarged basement
-                  windows & whole home water purification system. Grand dining
-                  room with a coffered ceiling & French door to a servery.
-                  Impressive great room with a vaulted ceiling, gas fireplace &
-                  huge windows. Spectacular Downsview kitchen with
-                  floor-to-ceiling cabinetry, under-cabinet lighting, island
-                  with breakfast bar, quartz counters, Wolf & SubZero
-                  appliances, & breakfast room with walkout to terrace. Main
-                  floor sunroom/office, powder room, mudroom & 2nd floor laundry
-                  room. All upstairs bedrooms have ensuite bathrooms & the
-                  primary bedroom features a gas fireplace & luxe 5-piece
-                  ensuite bath with soaker tub & glass shower. Downstairs offers
-                  a recreation/theatre room with gas fireplace & built-in
-                  speakers, a games room, wet bar, gym, bedroom 5 & 3-piece
-                  bathroom. Close to lake, Bronte Village, highways & GO Train.
-                  10+!
-                </p>
+              <div dangerouslySetInnerHTML={{ __html: he.decode(property.Description) }} />
               </div>
             </div>
             <div className="col-md-4">
@@ -253,7 +231,7 @@ const ListingDetailPage = () => {
       )}
 
 
-    <PropertySpotlight/>
+    {/* <PropertySpotlight/> */}
     <Footer/>
     </div>
   );

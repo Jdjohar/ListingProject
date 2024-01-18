@@ -16,11 +16,37 @@ const AdminListing = () => {
   const [photoLink, setPhotoLink] = useState([])
   const [beds, setBeds] = useState('');
   const [bathroom, setBathroom] = useState('');
+  const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
 
+  const handleEditorChange = (event, editor) => {
+    console.log('handleEditorChange start');
+    const data = editor.getData();
+     // Remove the <p> tags
+    //  const strippedData = data.replace(/<\/?p>/g, '');
+
+    setDescription(data);
+    console.log(data, "data");
+};
    const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+    console.table([
+       propertyName,
+        address,
+                saleType,
+                featured,
+                areaSq,
+                propertyType,
+                 neighbourhood,
+               beds,
+                 bathroom,
+              description,
+              price
+            ]
+    );
 
     try {
         const formData = new FormData();
@@ -30,7 +56,7 @@ const AdminListing = () => {
         }
 
         // Make a separate request to upload images
-        const uploadResponse = await fetch("https://estate-tm2d.onrender.com/api/upload", {
+        const uploadResponse = await fetch("http://localhost:3001/api/upload", {
             method: 'POST',
             body: formData,
         });
@@ -45,7 +71,7 @@ const AdminListing = () => {
         const coverFormData = new FormData();
         coverFormData.append('coverImage', addedCoverPhotos);
 
-        const coverUploadResponse = await fetch("https://estate-tm2d.onrender.com/api/upload-cover", {
+        const coverUploadResponse = await fetch("http://localhost:3001/api/upload-cover", {
         method: 'POST',
         body: coverFormData,
         });
@@ -53,7 +79,7 @@ const AdminListing = () => {
         console.log('Uploaded cover image:', uploadedCoverImage);
         const coverImageUrl = uploadedCoverImage.coverImageUrl || '';
 
-        const response = await fetch("https://estate-tm2d.onrender.com/api/addproperty", {
+        const response = await fetch("http://localhost:3001/api/addproperty", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -67,6 +93,7 @@ const AdminListing = () => {
                 PropertyType: propertyType,
                 NeighbourHood: neighbourhood,
                 NumofBeds: beds,
+                Price: price,
                 NumofBathrooms: bathroom,
                 Description: description,
                 imageUrls: imageUrls,
@@ -75,7 +102,7 @@ const AdminListing = () => {
         });
 
         const json = await response.json();
-        console.log(json);
+        console.log( json, "Json Data after submit");
         if (json.Success) {
             console.log("Property successfully added");
             navigate("/");
@@ -94,6 +121,7 @@ const AdminListing = () => {
         <AdminForm
         type="Create"
         handleSubmit={handleSubmit}
+        handleEditorChange={handleEditorChange}
         propertyName={propertyName}
         setPropertyName={setPropertyName}
         address={address}
@@ -118,6 +146,7 @@ const AdminListing = () => {
         setBeds={setBeds}
         bathroom={bathroom}
         setBathroom={setBathroom}
+        setPrice={setPrice}
         description={description}
         setDescription={setDescription}
         />

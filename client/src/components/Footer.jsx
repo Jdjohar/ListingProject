@@ -11,7 +11,7 @@ const Footer = () => {
       // Fetch contact information from your backend
       const fetchContactInfo = async () => {
         try {
-          const response = await fetch('https://estate-tm2d.onrender.com/api/get-contact-info');
+          const response = await fetch('http://localhost:3001/api/get-contact-info');
           if (response.ok) {
             const data = await response.json();
             setContactInfo(data); // Set the received data to state

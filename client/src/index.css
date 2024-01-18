@@ -650,7 +650,7 @@
   }
   
   .navbar {
-    background: transparent;
+    background: #222;
     z-index: 9;
   }
   
@@ -891,7 +891,10 @@
   .artists-image {
     border-radius: var(--border-radius-medium);
     display: block;
+
     width: 100%;
+    height: 300px;
+    object-fit: cover
   }
   
   .artists-thumb:hover .artists-hover {
@@ -1345,7 +1348,7 @@ footer {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.6);
+
   z-index: 1;
 }
 
@@ -1374,7 +1377,9 @@ footer {
   width: 200px;
 }
 .listing-carousel{
-  height: 80vh;
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
 }
 .listing-inner{
   height: 100%;
