@@ -11,7 +11,7 @@ useEffect(() => {
 
   // const fetchProperties = async () => {
   //   try {
-  //     const response = await fetch('http://localhost:3001/api/getproperties'); // Replace with your endpoint
+  //     const response = await fetch('https://estate-tm2d.onrender.com/api/getproperties'); // Replace with your endpoint
   //     const data = await response.json();
   //     if (data.message) {
   //         setNoFeaturedMessage(data.message);
@@ -25,7 +25,7 @@ useEffect(() => {
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/getproperties');
+      const response = await fetch('https://estate-tm2d.onrender.com/api/getproperties');
       const data = await response.json();
 
       // Assuming the server response is an array, if not, handle accordingly
@@ -42,7 +42,7 @@ useEffect(() => {
 
   const handleDeleteClick = async (propertyId) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/delproperty/${propertyId}`, {
+      const response = await fetch(`https://estate-tm2d.onrender.com/api/delproperty/${propertyId}`, {
         method: 'GET'
       });
 
@@ -60,7 +60,7 @@ useEffect(() => {
 
 //   const handleDeleteClick = async (propertyId) => {
 //     try {
-//         const response = await fetch(`http://localhost:3001/api/delproperty/${propertyId}`, {
+//         const response = await fetch(`https://estate-tm2d.onrender.com/api/delproperty/${propertyId}`, {
 //             method: 'GET'
 //         });
 
@@ -81,7 +81,7 @@ useEffect(() => {
   //   const newSaleType = e.target.value;
   
   //   try {
-  //     const response = await fetch(`http://localhost:3001/api/update-sale-type/${propertyId}`, {
+  //     const response = await fetch(`https://estate-tm2d.onrender.com/api/update-sale-type/${propertyId}`, {
   //       method: 'PUT',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ useEffect(() => {
                   <div className="artists-image-wrap">
                     {property.coverImageUrl ? (
                       <img
-                        src={`http://localhost:3001/${property.coverImageUrl}`}
+                        src={`https://estate-tm2d.onrender.com/${property.coverImageUrl}`}
                         className="artists-image img-fluid"
                         alt={`Property ${index} cover`}
                       />
