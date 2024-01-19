@@ -21,7 +21,7 @@ const Clearview = () => {
   const fetchProperties = async () => {
     try {
     
-      const response = await fetch('https://estate-tm2d.onrender.com/api/getpropertiesbyNeighbourHood', {
+      const response = await fetch('http://localhost:3001/api/getpropertiesbyNeighbourHood', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -193,7 +193,7 @@ const Clearview = () => {
                   <div className="artists-image-wrap">
                     {property.imageUrls && property.imageUrls[0] ? (
                       <img
-                        src={`https://estate-tm2d.onrender.com/${property.imageUrls[0]}`}
+                        src={`http://localhost:3001/${property.imageUrls[0]}`}
                         className="artists-image img-fluid"
                         alt={`Property ${index}`}
                       />

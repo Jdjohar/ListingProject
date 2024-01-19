@@ -8,20 +8,27 @@ import Footer from "../components/Footer";
 const Mississauga = () => {
 
   const [MississaugaProperties, setMississaugaProperties] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [propertyType, setPropertyType] = useState('Select property type');
+  const [numOfBathrooms, setNumOfBathrooms] = useState('Select bathrooms');
+  const [numOfBeds, setNumOfBeds] = useState('Select beds');
 
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [searchInput, propertyType, numOfBathrooms, numOfBeds]);
 
 
   const sendcityName = {
-    neighborhoods: 'mississauga'
+    neighborhoods: 'mississauga',
+    propertyType,
+    NumofBeds: numOfBeds,
+    NumofBathrooms: numOfBathrooms,
   }
 
   const fetchProperties = async () => {
     try {
     
-      const response = await fetch('https://estate-tm2d.onrender.com/api/getpropertiesbyNeighbourHood', {
+      const response = await fetch('http://localhost:3001/api/getpropertiesbyNeighbourHood', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,37 +134,47 @@ const Mississauga = () => {
                 placeholder="Search by address, city, state, zip..."
                 id="search-input"
                 name="search-input"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
             </div>
 
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
+              <select className=" w-100 serachbtn"
+                value={propertyType}
+                onChange={(e) => setPropertyType(e.target.value)}
+              >
                 <option>Select property type</option>
-                <option>Residential</option>
-                <option>Townhouse</option>
-                <option>Condo</option>
-                <option>Commercial</option>
-                <option>Multi-Family</option>
+                <option  value="residential">Residential</option>
+                <option value="townhouse">Townhouse</option>
+                <option value="condo">Condo</option>
+                <option value="commercial">Commercial</option>
+                <option value="multifamily">Multi-Family</option>
               </select>
             </div>
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
-                <option>1+ Bathrooms</option>
-                <option>2+ Bathrooms</option>
-                <option>3+ Bathrooms</option>
-                <option>4+ Bathrooms</option>
-                <option>5+ Bathrooms</option>
-                <option>6+ Bathrooms</option>
+              <select className=" w-100 serachbtn"
+                value={numOfBathrooms}
+                onChange={(e) => setNumOfBathrooms(e.target.value)}
+                >
+                <option value="1">1+ Bathrooms</option>
+                <option value="2">2+ Bathrooms</option>
+                <option value="3">3+ Bathrooms</option>
+                <option value="4">4+ Bathrooms</option>
+                <option value="5">5+ Bathrooms</option>
+                <option value="6">6+ Bathrooms</option>
               </select>
             </div>
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
-                <option>1+ Bedrooms</option>
-                <option>2+ Bedrooms</option>
-                <option>3+ Bedrooms</option>
-                <option>4+ Bedrooms</option>
-                <option>5+ Bedrooms</option>
-                <option>6+ Bedrooms</option>
+              <select className=" w-100 serachbtn"
+                value={numOfBeds}
+                onChange={(e) => setNumOfBeds(e.target.value)}>
+                <option value="1">1+ Bedrooms</option>
+                <option value="2">2+ Bedrooms</option>
+                <option value="3">3+ Bedrooms</option>
+                <option value="4">4+ Bedrooms</option>
+                <option value="5">5+ Bedrooms</option>
+                <option value="6">6+ Bedrooms</option>
               </select>
             </div>
           </div>
@@ -175,7 +192,7 @@ const Mississauga = () => {
                   <div className="artists-image-wrap">
                     {property.imageUrls && property.imageUrls[0] ? (
                       <img
-                        src={`https://estate-tm2d.onrender.com/${property.imageUrls[0]}`}
+                        src={`http://localhost:3001/${property.imageUrls[0]}`}
                         className="artists-image img-fluid"
                         alt={`Property ${index}`}
                       />
@@ -192,6 +209,10 @@ const Mississauga = () => {
                       <li>
                         <i className="bi bi-segmented-nav"></i>{' '}
                         <strong>{property.NumofBeds} Bed</strong>{' '}
+                      </li>
+                      <li>
+                        <i className="bi bi-segmented-nav"></i>{' '}
+                        <strong>{property.NumofBathrooms} Bath</strong>{' '}
                       </li>
                       <li>
                         <i className="bi bi-arrows-angle-expand"></i>{' '}

@@ -20,7 +20,7 @@ const HomePage = () => {
         {/* <Listing/> */}
         {/* <PropertySpotlight/> */}
         <MarketCoverage/>
-        <PressMedia/>
+        {/* <PressMedia/> */}
         <Contact/>
         <Footer/>
     </div>

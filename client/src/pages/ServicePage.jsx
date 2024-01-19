@@ -1,5 +1,5 @@
 import React from "react";
-import serviceImg from '../assets/images/services.gif'
+import serviceImg from '../assets/images/janet.jpg'
 import Footer from '../components/Footer'
 
 const ServicePage = () => {

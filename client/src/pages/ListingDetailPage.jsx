@@ -37,7 +37,7 @@ const ListingDetailPage = () => {
   const fetchPropertyDetails = async () => {
     console.log(propertyId , "asd");
     try {
-      const response = await fetch(`https://estate-tm2d.onrender.com/api/property/${propertyId}`); // Replace with your endpoint
+      const response = await fetch(`http://localhost:3001/api/property/${propertyId}`); // Replace with your endpoint
       const data = await response.json();
       console.log(data)
       setProperty(data);
@@ -49,7 +49,7 @@ const ListingDetailPage = () => {
   // Fetch contact information from your backend
   const fetchContactInfo = async () => {
     try {
-      const response = await fetch('https://estate-tm2d.onrender.com/api/get-contact-info');
+      const response = await fetch('http://localhost:3001/api/get-contact-info');
       if (response.ok) {
         const data = await response.json();
         setContactInfo(data); // Set the received data to state
@@ -80,14 +80,14 @@ const ListingDetailPage = () => {
         className={index === 0 ? "active h-25 w-25" : "h-25 w-25"}
         aria-label={`Slide ${index + 1}`}
       >
-        <img src={`https://estate-tm2d.onrender.com/${imageUrl}`} alt={`Slide ${index + 1}`} className="d-block w-100" />
+        <img src={`http://localhost:3001/${imageUrl}`} alt={`Slide ${index + 1}`} className="d-block w-100" />
       </button>
     ))}
   </div>
   <div className="carousel-inner listing-inner">
     {property && property.imageUrls && property.imageUrls.map((imageUrl, index) => (
       <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-        <img src={`https://estate-tm2d.onrender.com/${imageUrl}`} className="d-block w-100 h-100" alt={`Image ${index + 1}`} />
+        <img src={`http://localhost:3001/${imageUrl}`} className="d-block w-100 h-100" alt={`Image ${index + 1}`} />
       </div>
     ))}
   </div>  

@@ -36,7 +36,7 @@ const MarketCoverage = () => {
                                 </div>
                         </div>
                     </div> */}
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    <div className="col-lg-6 col-md-6 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city3} alt="city" />
                                 <div className="overlay">
@@ -47,7 +47,7 @@ const MarketCoverage = () => {
                                 </div>
                         </div>
                     </div>
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    <div className="col-lg-6 col-md-6 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city4} alt="city" />
                                 <div className="overlay">
@@ -80,7 +80,7 @@ const MarketCoverage = () => {
                                 </div>
                         </div>
                     </div> */}
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    <div className="col-lg-6 col-md-6 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city7} alt="city" />
                                 <div className="overlay">
@@ -102,7 +102,7 @@ const MarketCoverage = () => {
                                 </div>
                         </div>
                     </div> */}
-                    <div className="col-lg-4 col-md-4 mb-3 col-sm-6 col-xs-12">
+                    <div className="col-lg-6 col-md-6 mb-3 col-sm-6 col-xs-12">
                         <div className="hovereffect">
                             <img className="img-fluid" src={city9} alt="city" />
                                 <div className="overlay">

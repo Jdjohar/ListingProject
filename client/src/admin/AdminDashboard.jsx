@@ -3,48 +3,102 @@ import { Link } from 'react-router-dom'
 import AdminNavbar from './AdminNavbar'
 const AdminDashboard = () => {
   const [allproperties, setAllProperties] = useState([]);
-const [noFeaturedMessage, setNoFeaturedMessage] = useState('');
+// const [noFeaturedMessage, setNoFeaturedMessage] = useState('');
 
 useEffect(() => {
     fetchProperties();
   }, []);
 
+  // const fetchProperties = async () => {
+  //   try {
+  //     const response = await fetch('http://localhost:3001/api/getproperties'); // Replace with your endpoint
+  //     const data = await response.json();
+  //     if (data.message) {
+  //         setNoFeaturedMessage(data.message);
+  //     } else {
+  //       setAllProperties(data);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching properties:', error);
+  //   }
+  // };
+
   const fetchProperties = async () => {
     try {
-      const response = await fetch('https://estate-tm2d.onrender.com/api/getproperties'); // Replace with your endpoint
+      const response = await fetch('http://localhost:3001/api/getproperties');
       const data = await response.json();
-      if (data.message) {
-          setNoFeaturedMessage(data.message);
-      } else {
+
+      // Assuming the server response is an array, if not, handle accordingly
+      if (Array.isArray(data)) {
         setAllProperties(data);
+      } else {
+        setAllProperties([]);
       }
     } catch (error) {
       console.error('Error fetching properties:', error);
+      setAllProperties([]); // Set to an empty array in case of an error
     }
   };
 
-  const handleSaleTypeChange = async (e, propertyId) => {
-    const newSaleType = e.target.value;
-  
+  const handleDeleteClick = async (propertyId) => {
     try {
-      const response = await fetch(`https://estate-tm2d.onrender.com/api/update-sale-type/${propertyId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ newSaleType }),
+      const response = await fetch(`http://localhost:3001/api/delproperty/${propertyId}`, {
+        method: 'GET'
       });
-  
-      if (response.ok) {
-        // Update the state or re-fetch properties after successful update
-        fetchProperties(); // You may need to define this function to update properties after the change.
+
+      const json = await response.json();
+
+      if (json.success) {
+        fetchProperties(); // Refresh the properties list
       } else {
-        console.error('Failed to update SaleType');
+        console.error('Error deleting property:', json.message);
       }
     } catch (error) {
-      console.error('Error updating SaleType:', error);
+      console.error('Error deleting property:', error);
     }
   };
+
+//   const handleDeleteClick = async (propertyId) => {
+//     try {
+//         const response = await fetch(`http://localhost:3001/api/delproperty/${propertyId}`, {
+//             method: 'GET'
+//         });
+
+//         const json = await response.json();
+
+//         if (json.success) {
+//             fetchProperties(); // Refresh the properties list
+//         } else {
+//             console.error('Error deleting property:', json.message);
+//         }
+//     } catch (error) {
+//         console.error('Error deleting property:', error);
+//     }
+// };
+
+
+  // const handleSaleTypeChange = async (e, propertyId) => {
+  //   const newSaleType = e.target.value;
+  
+  //   try {
+  //     const response = await fetch(`http://localhost:3001/api/update-sale-type/${propertyId}`, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ newSaleType }),
+  //     });
+  
+  //     if (response.ok) {
+  //       // Update the state or re-fetch properties after successful update
+  //       fetchProperties(); // You may need to define this function to update properties after the change.
+  //     } else {
+  //       console.error('Failed to update SaleType');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating SaleType:', error);
+  //   }
+  // };
   
   return (
     <div>
@@ -53,14 +107,15 @@ useEffect(() => {
         <div className="container">
           <div className="row justify-content-center">
             <h2 className="text-dark text-center mb-5">Listing </h2>
-            {noFeaturedMessage && <p className='text-center fw-bold'>{noFeaturedMessage}</p>}
+            {/* {noFeaturedMessage && <p className='text-center fw-bold'>{noFeaturedMessage}</p>} */}
+            {allproperties.length === 0 ?? <p className='text-center fw-bold'>No properties available.</p>}
             {allproperties.map((property, index) => (
               <div key={index} className="col-lg-4 col-12 my-2">
                 <div className="shad p-3">
                   <div className="artists-image-wrap">
                     {property.coverImageUrl ? (
                       <img
-                        src={`https://estate-tm2d.onrender.com/${property.coverImageUrl}`}
+                        src={`http://localhost:3001/${property.coverImageUrl}`}
                         className="artists-image img-fluid"
                         alt={`Property ${index} cover`}
                       />
@@ -74,7 +129,13 @@ useEffect(() => {
                         <h5>{property.PropertyName}</h5>
                       </div>
                       <div className="col-4">
-                        <select
+                        <a role='button' className="btn btn-success btn-sm me-2 text-white" onClick={ () => handleEditClick(product)}>
+                          <i className="fas fa-pen"></i>
+                        </a>
+                        <button type="button" className="btn btn-danger btn-sm me-2" onClick={() => handleDeleteClick(property._id)}>
+                          <i className="fas fa-trash"></i>
+                        </button>
+                        {/* <select
                           className="form-select"
                           value={property.SaleType}
                           onChange={(e) => handleSaleTypeChange(e, property._id)}
@@ -82,7 +143,7 @@ useEffect(() => {
                           <option value="For Sale">For Sale</option>
                           <option value="Rent">Rent</option>
                           <option value="Sold Out">Sold Out</option>
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                     

@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import footerlogoImg from '../assets/images/homelifelogo.webp'
 
 const Footer = () => {
     const [contactInfo, setContactInfo] = useState(null);
@@ -11,7 +12,7 @@ const Footer = () => {
       // Fetch contact information from your backend
       const fetchContactInfo = async () => {
         try {
-          const response = await fetch('https://estate-tm2d.onrender.com/api/get-contact-info');
+          const response = await fetch('http://localhost:3001/api/get-contact-info');
           if (response.ok) {
             const data = await response.json();
             setContactInfo(data); // Set the received data to state
@@ -23,6 +24,13 @@ const Footer = () => {
           console.error(error);
           // Handle error
         }
+      };
+
+      const formatPhoneNumber = (phoneNumber) => {
+        // Convert phoneNumber to string if it's not already
+        const phoneNumberString = phoneNumber.toString();
+        // Assuming the phoneNumber is in the format '3653387653'
+        return `${phoneNumberString.slice(0, 3)}-${phoneNumberString.slice(3, 6)}-SOLD(${phoneNumberString.slice(6)})`;
       };
     
   return (
@@ -69,8 +77,8 @@ const Footer = () => {
                 {contactInfo ? (
                     <>
                 <p className="text-white d-flex mb-1">
-                    <Link to={"tel: 090-080-0760"} className="site-footer-link">
-                    {contactInfo[0].phoneNumber}
+                    <Link to={`tel:${contactInfo[0].phoneNumber}`} className="site-footer-link">
+                    {formatPhoneNumber(contactInfo[0].phoneNumber)}
                     </Link>
                 </p>
 
@@ -97,6 +105,27 @@ const Footer = () => {
                 ) : (
                     <p>Loading contact information...</p>
                   )}
+
+                <div className="fs-4 text-white">
+                    <div>
+                        <Link className="info" to={'https://www.facebook.com/Janetshiwramrealty '} target='_blank'>
+                            <i class="fab fa-facebook-f mx-2"></i>
+                        </Link>
+                        <Link to={"https://www.instagram.com/janetshiwramrealty"} target='_blank'>
+                            <i class="fab fa-instagram mx-2"></i>
+                        </Link>
+                        <Link to={"https://www.tiktok.com/janetshiwramrealty"} target='_blank' >
+                            <i class="fab fa-tiktok mx-2"></i>
+                        </Link>
+                    </div>
+                    <div className=''>
+                        <img
+                            src={footerlogoImg}
+                            className="about-image img-fluid"
+                            width="60%"
+                        />
+                    </div>
+                    </div>
                 {/* <Link className="link-fx-1 color-contrast-higher mt-3" to={'/'}>
                     <span>Our Maps</span>
                     <svg className="icon" viewBox="0 0 32 32" aria-hidden="true">
@@ -113,13 +142,13 @@ const Footer = () => {
 
     <div className="site-footer-bottom">
         <div className="container">
-            <div className="row">
+            <div className="row mt-4">
 
                 <div className="col-lg-3 col-12 mt-2">
                     <p className="copyright-text">Copyright © 2024</p>
                 </div>
 
-                <div className="col-lg-8 col-12 mt-lg-5">
+                <div className="col-lg-8 col-12 text-end fs-2 text-white">
                     
                 </div>
             </div>

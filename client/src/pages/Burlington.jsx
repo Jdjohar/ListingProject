@@ -8,20 +8,27 @@ import Footer from "../components/Footer";
 const Burlington = () => {
 
   const [BurlingtonProperties, setBurlingtonProperties] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [propertyType, setPropertyType] = useState('Select property type');
+  const [numOfBathrooms, setNumOfBathrooms] = useState('Select bathrooms');
+  const [numOfBeds, setNumOfBeds] = useState('Select beds');
 
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [searchInput, propertyType, numOfBathrooms, numOfBeds]);
 
 
   const sendcityName = {
-    neighborhoods: 'burlington'
+    neighborhoods: 'burlington',
+    propertyType,
+    NumofBeds: numOfBeds,
+    NumofBathrooms: numOfBathrooms,
   }
 
   const fetchProperties = async () => {
     try {
     
-      const response = await fetch('https://estate-tm2d.onrender.com/api/getpropertiesbyNeighbourHood', {
+      const response = await fetch('http://localhost:3001/api/getpropertiesbyNeighbourHood', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +59,7 @@ const Burlington = () => {
             <div className="col-12 mt-auto mb-5 text-center">
               <h1 className="text-white mb-5">BURLINGTON</h1>
               <p className="text-white">
-                Burlington is a vibrant city in Vermont known for its charming historic downtown, diverse cultural scene, and stunning views of Lake Champlain.
+              Burlington is a city in the Regional Municipality of Halton at the west end of Lake Ontario in Ontario, Canada. Located approximately halfway between Toronto and Niagara Falls, it is part of the Greater Toronto and Hamilton Area and Hamilton metropolitan census area.
               </p>
             </div>
           </div>
@@ -81,46 +88,29 @@ const Burlington = () => {
                 <h2 className="text-dark mb-4">WELCOME TO BURLINGTON </h2>
 
                 <p className="text-dark text-justify">
-                    The Central Government War Headquarters (CGWHQ) is a 35-acre (14 ha)[1] 
-                    complex built 120 feet (37 m) underground[2] as the United Kingdom's 
-                    emergency government war headquarters – the hub of the country's 
-                    alternative seat of power outside London during a nuclear war or 
-                    conflict with the Soviet Union. It is in Corsham, Wiltshire, in a 
-                    former Bath stone quarry known as Spring Quarry, under the present-day 
-                    MoD Corsham.</p>
+                  Before the 19th century, the area between the provincial capital of York and the 
+                  township of West Flamborough was home to the Mississauga nation. In 1792, John 
+                  Graves Simcoe, the first lieutenant governor of Upper Canada, named the western 
+                  end of Lake Ontario "Burlington Bay" after the town of Bridlington in the East 
+                  Riding of Yorkshire, England.[4]</p>
 
                     
-                <p className="text-dark text-justify">In 1940, during the Second World War, the site was acquired by the 
-                    Minister of Aircraft Production and used as an underground 
-                    engine factory.[1] The war headquarters was commissioned in 
-                    1955, after approval by Prime Minister Anthony Eden.[1] However, 
-                    it became outdated shortly after it was built, due to intercontinental 
-                    ballistic missiles being able to target it, and the formulation of other 
-                    plans (such as PYTHON). Nevertheless, the complex continued to have a 
-                    role in war plans and remained in operation for 30 years.
+                <p className="text-dark text-justify">The British purchased the land on which Burlington 
+                  now stands from the Mississaugas in Upper Canada Treaties 3 (1792), 8 (1797), 
+                  14 (1806), and 19 (1818). Treaty 8 concerned the purchase of the Brant Tract, 14.0 km2 (3,450 acres) on Burlington Bay which the British granted to Mohawk chief Joseph Brant for his service in the American Revolutionary War.[5][6] Joseph Brant and his household settled on this tract of land around 1802.[7] Brant is accordingly often referred to as the founder of Burlington, and the city of Burlington still celebrates an annual Joseph Brant Day in early August.[8][9] Subsequent disputes between the Mississaugas of the Credit First Nation and the Canadian government over payment for the Brant Tract and the Toronto Purchase were settled in 2010 for the sum of $145 million (CAD).[6][10]
                 </p>
 
-                <h6 className="text-dark  mt-4">Features</h6>
+                <h6 className="text-dark  mt-4">Geography</h6>
                 <p className="text-dark text-justify">
-                    Over 1 kilometre (0.62 mi; 3,300 ft) in length, and with 
-                    over 60 miles (97 km) of roads, the site was designed to 
-                    accommodate the Prime Minister, the entire Cabinet Office, other 
-                    civil servants, and domestic support staff.
-
-                    Blast-proof and self-sufficient, the complex could accommodate 
-                    up to 4,000 people in complete isolation from the outside world 
-                    for up to three months. The underground city was equipped with 
-                    all the facilities needed to survive: from hospitals, canteens, 
-                    kitchens and laundries to storerooms for supplies, accommodation 
-                    areas and offices. An underground lake and treatment plant could 
-                    provide drinking water, and twelve tanks could store the fuel 
-                    required to keep the four generators in the underground power 
-                    station running for up to three months. The air within the complex 
-                    could be kept at a constant humidity and heated to around 20 °C (68 °F). 
-                    It was also equipped with the second-largest telephone exchange in Britain,
-                    a BBC studio from which the PM could address the nation, and an internal 
-                    Lamson Tube system that could relay messages throughout the complex, 
-                    using compressed air.</p>
+                  Burlington is at the southwestern end of Lake Ontario, just to the north east 
+                  of Hamilton and the Niagara Peninsula, roughly in the geographic centre of the 
+                  urban corridor known as the Golden Horseshoe. Burlington has a land area of 187 
+                  km2 (72 sq mi). The main urban area is south of the Parkway Belt and Hwy. 407. 
+                  The land north of this, and north Aldershot is used primarily for agriculture, 
+                  rural residential and conservation purposes. The Niagara Escarpment, Lake Ontario 
+                  and the sloping plain between the escarpment and the lake make up the land area of 
+                  Burlington. The city is no longer a port; sailing vessels in the area are used for 
+                  recreational purposes and moor at a 215 slip marina in LaSalle Park.</p>
               </div>
             </div>
           </div>
@@ -145,37 +135,48 @@ const Burlington = () => {
                 placeholder="Search by address, city, state, zip..."
                 id="search-input"
                 name="search-input"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
             </div>
 
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
+              <select 
+                className=" w-100 serachbtn"
+                value={propertyType}
+                onChange={(e) => setPropertyType(e.target.value)}
+              >
                 <option>Select property type</option>
-                <option>Residential</option>
-                <option>Townhouse</option>
-                <option>Condo</option>
-                <option>Commercial</option>
-                <option>Multi-Family</option>
+                <option  value="residential">Residential</option>
+                <option value="townhouse">Townhouse</option>
+                <option value="condo">Condo</option>
+                <option value="commercial">Commercial</option>
+                <option value="multifamily">Multi-Family</option>
               </select>
             </div>
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
-                <option>1+ Bathrooms</option>
-                <option>2+ Bathrooms</option>
-                <option>3+ Bathrooms</option>
-                <option>4+ Bathrooms</option>
-                <option>5+ Bathrooms</option>
-                <option>6+ Bathrooms</option>
+              <select className=" w-100 serachbtn"
+                value={numOfBathrooms}
+                onChange={(e) => setNumOfBathrooms(e.target.value)}
+                >
+                <option value="1">1+ Bathrooms</option>
+                <option value="2">2+ Bathrooms</option>
+                <option value="3">3+ Bathrooms</option>
+                <option value="4">4+ Bathrooms</option>
+                <option value="5">5+ Bathrooms</option>
+                <option value="6">6+ Bathrooms</option>
               </select>
             </div>
             <div className="col-md-4">
-              <select className=" w-100 serachbtn">
-                <option>1+ Bedrooms</option>
-                <option>2+ Bedrooms</option>
-                <option>3+ Bedrooms</option>
-                <option>4+ Bedrooms</option>
-                <option>5+ Bedrooms</option>
-                <option>6+ Bedrooms</option>
+              <select className=" w-100 serachbtn"
+                value={numOfBeds}
+                onChange={(e) => setNumOfBeds(e.target.value)}>
+                <option value="1">1+ Bedrooms</option>
+                <option value="2">2+ Bedrooms</option>
+                <option value="3">3+ Bedrooms</option>
+                <option value="4">4+ Bedrooms</option>
+                <option value="5">5+ Bedrooms</option>
+                <option value="6">6+ Bedrooms</option>
               </select>
             </div>
           </div>
@@ -193,7 +194,7 @@ const Burlington = () => {
                   <div className="artists-image-wrap">
                     {property.imageUrls && property.imageUrls[0] ? (
                       <img
-                        src={`https://estate-tm2d.onrender.com/${property.imageUrls[0]}`}
+                        src={`http://localhost:3001/${property.imageUrls[0]}`}
                         className="artists-image img-fluid"
                         alt={`Property ${index}`}
                       />
@@ -210,6 +211,10 @@ const Burlington = () => {
                       <li>
                         <i className="bi bi-segmented-nav"></i>{' '}
                         <strong>{property.NumofBeds} Bed</strong>{' '}
+                      </li>
+                      <li>
+                        <i className="bi bi-segmented-nav"></i>{' '}
+                        <strong>{property.NumofBathrooms} Bath</strong>{' '}
                       </li>
                       <li>
                         <i className="bi bi-arrows-angle-expand"></i>{' '}

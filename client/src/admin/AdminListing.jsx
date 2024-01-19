@@ -56,7 +56,7 @@ const AdminListing = () => {
         }
 
         // Make a separate request to upload images
-        const uploadResponse = await fetch("https://estate-tm2d.onrender.com/api/upload", {
+        const uploadResponse = await fetch("http://localhost:3001/api/upload", {
             method: 'POST',
             body: formData,
         });
@@ -71,7 +71,7 @@ const AdminListing = () => {
         const coverFormData = new FormData();
         coverFormData.append('coverImage', addedCoverPhotos);
 
-        const coverUploadResponse = await fetch("https://estate-tm2d.onrender.com/api/upload-cover", {
+        const coverUploadResponse = await fetch("http://localhost:3001/api/upload-cover", {
         method: 'POST',
         body: coverFormData,
         });
@@ -79,7 +79,7 @@ const AdminListing = () => {
         console.log('Uploaded cover image:', uploadedCoverImage);
         const coverImageUrl = uploadedCoverImage.coverImageUrl || '';
 
-        const response = await fetch("https://estate-tm2d.onrender.com/api/addproperty", {
+        const response = await fetch("http://localhost:3001/api/addproperty", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
